@@ -16,6 +16,10 @@ This is a Assignment project to connect a Raspberry PI to Dweet.io as a Websocke
 
 `` source venv/bin/activate ``
 
+4 - Install the python requirements
+
+``pip3 install -r requirements.txt``
+
 ## How to use
 
 You can simply run the dweet_led.py file
