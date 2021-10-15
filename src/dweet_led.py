@@ -22,6 +22,8 @@ import requests                                                                 
 
 # Global Variables
 LED_GPIO_PIN = 21                   # GPIO Pin that LED is connected to
+LED2_GPIO_PIN = 20
+
 THING_NAME_FILE = 'thing_name.txt'  # The name of our "thing" is persisted into this file
 URL = 'https://dweet.io'            # Dweet.io service API
 last_led_state = None               # Current state of LED ("on", "off", "blinking")
@@ -43,8 +45,11 @@ Device.pin_factory = PiGPIOFactory()
 def init_led():
     """Create and initialise an LED Object"""
     global led
+    global led2
     led = LED(LED_GPIO_PIN)
+    led2 = LED(LED2_GPIO_PIN)
     led.off()
+    led2.off()
 
 
 def resolve_thing_name(thing_file):
@@ -147,11 +152,14 @@ def process_dweet(dweet):
 
     if led_state == 'on':                                                          # (15)
         led.on()
+        led2.on()
     elif led_state == 'blink':
         led.blink()
+        led2.blink()
     else: # Off, including any unhandled state.
         led_state = 'off'
         led.off()
+        led2.off()
 
     if led_state != last_led_state:                                                # (16)
         last_led_state = led_state
